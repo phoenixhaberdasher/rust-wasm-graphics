@@ -42,6 +42,15 @@ jobs:
           cp index.html dist/
           cp -r pkg dist/
 
+      - name: ✅ Verify dist contents
+        run: |
+          echo "Verifying dist directory contents..."
+          ls -R dist
+          echo "Expected files:"
+          echo "- dist/index.html"
+          echo "- dist/pkg/rust_wasm_graphics.js"
+          echo "- dist/pkg/rust_wasm_graphics_bg.wasm"
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
