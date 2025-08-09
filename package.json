@@ -1,0 +1,6 @@
+{
+  "name": "rust-wasm-graphics",
+  "version": "0.1.0",
+  "description": "Rust WASM graphics demo",
+  "license": "MIT"
+}
