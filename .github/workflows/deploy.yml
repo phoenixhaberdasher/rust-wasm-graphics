@@ -1,14 +1,14 @@
-name: Build and Deploy Rust WASM
+name: Build and Deploy WASM to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -17,23 +17,22 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          target: wasm32-unknown-unknown
           override: true
 
       - name: Install wasm-pack
-        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+        run: cargo install wasm-pack
 
       - name: Build WASM
-        run: wasm-pack build --target web --out-dir ./docs/pkg
-      
-      - name: List docs/pkg contents
-        run: ls -l docs/pkg
+        run: wasm-pack build --target web
 
-      - name: Copy index.html
-        run: cp index.html docs/index.html
+      - name: Prepare deployment directory
+        run: |
+          mkdir dist
+          cp index.html dist/
+          cp -r pkg dist/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./dist
