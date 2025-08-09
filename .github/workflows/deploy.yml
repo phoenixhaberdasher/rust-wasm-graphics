@@ -25,6 +25,9 @@ jobs:
 
       - name: Build WASM
         run: wasm-pack build --target web --out-dir ./docs/pkg
+      
+      - name: List docs/pkg contents
+        run: ls -l docs/pkg
 
       - name: Copy index.html
         run: cp index.html docs/index.html
