@@ -1,4 +1,4 @@
-name: Build and Deploy WASM to GitHub Pages
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Install Rust
@@ -22,8 +22,19 @@ jobs:
       - name: Install wasm-pack
         run: cargo install wasm-pack
 
+      - name: Check wasm-pack version
+        run: wasm-pack --version
+
       - name: Build WASM
-        run: wasm-pack build --target web
+        run: |
+          echo "Running wasm-pack build..."
+          wasm-pack build --target web
+          echo "Listing pkg directory:"
+          ls -la pkg
+          if [ ! -f pkg/rust_wasm_graphics.js ]; then
+            echo "ERROR: rust_wasm_graphics.js not found. Build failed."
+            exit 1
+          fi
 
       - name: Prepare deployment directory
         run: |
