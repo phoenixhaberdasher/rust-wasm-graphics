@@ -7,20 +7,18 @@
 </head>
 <body>
   <canvas id="canvas" width="800" height="600"></canvas>
+  <div id="svg-container"></div>
 
   <script type="module">
-    import init from './pkg/rust_wasm_graphics.js';
+    import init, { render_svg } from './pkg/rust_wasm_graphics.js';
 
     async function run() {
       await init();
-      // If your Rust code exposes a `start()` function, you can call it here:
-      // import { start } from './pkg/rust_wasm_graphics.js';
-      // start();
+      const svgString = render_svg();
+      document.getElementById("svg-container").innerHTML = svgString;
     }
 
     run();
   </script>
 </body>
 </html>
-
-
