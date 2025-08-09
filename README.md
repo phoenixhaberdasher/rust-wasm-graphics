@@ -1,3 +1,3 @@
 # rust-wasm-graphics
 
-Rust-WASM graphics creator.
+Rust WASM graphics creator.
