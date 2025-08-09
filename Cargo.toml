@@ -1,1 +1,16 @@
+[package]
+name = "rust-wasm-graphics"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+pixels = "0.13"
+wgpu = "0.19"
+embedded-graphics = "0.8"
+log = "0.4"
+console_error_panic_hook = "0.1"
 
