@@ -3,12 +3,28 @@
   <head>
     <meta charset="utf-8" />
     <title>Rust WASM Graphics</title>
+    <style>
+      #svg-container {
+        width: 800px;
+        height: 600px;
+        border: 1px solid #ccc;
+      }
+    </style>
   </head>
   <body>
-    <canvas id="canvas" width="800" height="600"></canvas>
+    <h1>Rust-Generated SVG</h1>
+    <div id="svg-container"></div>
+
     <script type="module">
-      import init from './pkg/rust_wasm_graphics.js';
-      init();
+      import init, { render_svg } from './pkg/rust_wasm_graphics.js';
+
+      async function run() {
+        await init(); // Load and initialize the WASM module
+        const svgString = render_svg(); // Call the Rust function
+        document.getElementById("svg-container").innerHTML = svgString; // Display SVG
+      }
+
+      run();
     </script>
   </body>
 </html>
