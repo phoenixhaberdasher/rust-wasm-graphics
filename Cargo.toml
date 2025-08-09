@@ -13,4 +13,4 @@ wgpu = "0.19"
 embedded-graphics = "0.8"
 log = "0.4"
 console_error_panic_hook = "0.1"
-
+svg = "0.10"
